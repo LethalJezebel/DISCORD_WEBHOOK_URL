@@ -1,0 +1,23 @@
+name: Send quarterly Discord webhook message
+
+on:
+  schedule:
+    # 16:17 UTC = 9:17 AM Phoenix time
+    # Runs on Jan 1, Apr 1, Jul 1, Oct 1
+    - cron: '17 16 1 1,4,7,10 *'
+  workflow_dispatch:
+
+jobs:
+  send-message:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send message to Discord
+        run: |
+          curl -H "Content-Type: application/json" \
+               -X POST \
+               -d @- \
+               "${{ secrets.DISCORD_WEBHOOK_URL }}" <<'EOF'
+          {
+            "content": "# :disney_stitchthinking: NEED A MOD? DON'T SUFFER IN SILENCE\n## :e_mail: Use the Contact a Mod Ticket Tool\nHey <@1232931371991961651> :cat_wave:\n\nJust a quick reminder that we have a **Contact a Mod system** available if you ever need help with something in the IMVU room or the Discord server.\n## :4pinkamazed: What it's for:\n* Reporting trolls or disruptive behavior\n* Handling uncomfortable situations\n* Bringing something to the mod team privately\n* Getting help with server issues\n## :4pinkhappy: How it works:\nNavigate to the <#1322047883037638788> and click the **“Contact a Mod”** button on the ticket tool. It will open a private ticket with the mod team so we can help you directly.\n## :4pinkpeace: This is the fastest way to reach us.\nMessages can get buried — tickets do not.\n## :4pinkbooster: Save yourself the stress — if something feels off, just open a ticket.\n## :heart_teal: Your Gamergirl. Mods"
+          }
+          EOF
