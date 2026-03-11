@@ -2,7 +2,7 @@ name: Send quarterly Discord webhook message
 
 on:
   schedule:
-    # March 31 — 10:17 AM Phoenix (17:17 UTC)
+    # March 31 — 10:17 AM Phoenix
     - cron: '17 17 31 3 *'
 
     # June 30 — 10:17 AM Phoenix
@@ -23,10 +23,10 @@ jobs:
       - name: Send message to Discord
         run: |
           curl -H "Content-Type: application/json" \
-               -X POST \
-               -d @- \
-               "${{ secrets.DISCORD_WEBHOOK_URL }}" <<'EOF'
+          -X POST \
+          -d @- \
+          "${{ secrets.DISCORD_WEBHOOK_URL }}" <<'EOF'
           {
-            "content": "# :disney_stitchthinking: NEED A MOD? DON'T SUFFER IN SILENCE\n## :e_mail: Use the Contact a Mod Ticket Tool\nHey <@1232931371991961651> :cat_wave:\n\nJust a quick reminder that we have a **Contact a Mod system** available if you ever need help with something in the IMVU room or the Discord server.\n## :4pinkamazed: What it's for:\n* Reporting trolls or disruptive behavior\n* Handling uncomfortable situations\n* Bringing something to the mod team privately\n* Getting help with server issues\n## :4pinkhappy: How it works:\nNavigate to the <#1322047883037638788> and click the **“Contact a Mod”** button on the ticket tool. It will open a private ticket with the mod team so we can help you directly.\n## :4pinkpeace: This is the fastest way to reach us.\nMessages can get buried — tickets do not.\n## :4pinkbooster: Save yourself the stress — if something feels off, just open a ticket.\n## :heart_teal: Your Gamergirl. Mods"
+            "content": "# <a:disney_stitchthinking:1266537204373651496> NEED A MOD? DON'T SUFFER IN SILENCE\n## :e_mail: Use the Contact a Mod Ticket Tool\nHey <@1232931371991961651> <a:cat_wave:1266533941104611399>\n\nJust a quick reminder that we have a **Contact a Mod system** available if you ever need help with something in the IMVU room or the Discord server.\n\n## <:4pinkamazed:1307476979368329246> What it's for:\n* Reporting trolls or disruptive behavior\n* Handling uncomfortable situations\n* Bringing something to the mod team privately\n* Getting help with server issues\n\n## <:4pinkhappy:1307476987870445588> How it works:\nNavigate to the <#1322047883037638788> and click the **“Contact a Mod”** button on the ticket tool. It will open a private ticket with the mod team so we can help you directly.\n\n## <:4pinkpeace:1307476997441720351> This is the fastest way to reach us.\nMessages can get buried — tickets do not.\n\n## <:4pinkbooster:1234186170963984414> Save yourself the stress — if something feels off, just open a ticket.\n\n## <:heart_teal:1234185197319360512> Your Gamergirl. Mods"
           }
           EOF
